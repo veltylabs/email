@@ -129,3 +129,9 @@ git diff --stat main                                         # only the files of
 | 1 | the driver | `email.go`, `send.go`, `go.mod` |
 | 2 | tests | `tests/driver_test.go`, `tests/send_test.go` |
 | 3 | docs | `README.md`, `docs/ARCHITECTURE.md` |
+
+## Executor notes
+- `webtyp.com/notify` at `v0.1.0` defines `notify.Config.Settings` and `notify.Config.Secrets` as `[]notify.Setting`, not maps. Iterated over these to get values using a helper function.
+- `SecretResolver` interface in `v0.1.0` has a `Secret(name string) (string, error)` method, not `Resolve()`.
+- Implemented `contains`, `hasPrefix`, and `hasSuffix` manually in `email.go` to conform with rule prohibiting `strings` standard package.
+- Used `http.NewRequest` instead of `http.NewRequestWithContext` since `Channel.Send` method in `notify` interface doesn't accept a `context.Context` parameter. Checked timeout in tests using the injected HTTP Client's internal timeout instead of `context.WithDeadline`.
