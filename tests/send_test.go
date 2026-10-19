@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/veltylabs/email"
+	"webtyp.com/msgtype"
 	"webtyp.com/notify"
 )
 
@@ -102,10 +103,10 @@ func TestSend(t *testing.T) {
 			wantError: notify.ErrNoAddress.Error(),
 		},
 		{
-			name: "urgency critical",
+			name: "level error",
 			alert: notify.Alert{
 				Subject: "System Down",
-				Urgency: notify.Critical,
+				Level:   msgtype.Error,
 			},
 			to:           notify.Recipient{Email: "user@example.com"},
 			serverStatus: http.StatusOK,
@@ -117,10 +118,10 @@ func TestSend(t *testing.T) {
 			},
 		},
 		{
-			name: "urgency warning",
+			name: "level warning",
 			alert: notify.Alert{
 				Subject: "Disk low",
-				Urgency: notify.Warning,
+				Level:   msgtype.Warning,
 			},
 			to:           notify.Recipient{Email: "user@example.com"},
 			serverStatus: http.StatusOK,

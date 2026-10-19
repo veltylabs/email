@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 
+	"webtyp.com/msgtype"
 	"webtyp.com/notify"
 )
 
@@ -58,16 +59,23 @@ type responseResult struct {
 	Queued           []string `json:"queued"`
 }
 
+// Subject prefixes by alert level; an Info alert has none.
+const (
+	prefixError   = "[URGENT] "
+	prefixWarning = "[WARNING] "
+)
+
 func (c *channel) Send(a notify.Alert, to notify.Recipient) error {
 	if to.Email == "" {
 		return notify.ErrNoAddress
 	}
 
 	subject := a.Subject
-	if a.Urgency == notify.Critical {
-		subject = "[URGENT] " + subject
-	} else if a.Urgency == notify.Warning {
-		subject = "[WARNING] " + subject
+	switch a.Level {
+	case msgtype.Error:
+		subject = prefixError + subject
+	case msgtype.Warning:
+		subject = prefixWarning + subject
 	}
 
 	reqBody := sendRequest{
