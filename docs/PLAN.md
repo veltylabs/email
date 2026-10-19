@@ -5,7 +5,7 @@ EXECUTOR: jules
 REVIEWER: none
 ---
 
-> **ON HOLD — do not dispatch** until `webtyp.com/notify` v0.1.0 is published. Then replace `NOTIFY_TAG` below by the exact tag and dispatch.
+> `webtyp.com/notify` v0.1.0 is published; this plan depends on it.
 
 > Read AGENTS.md at the repo root before any change.
 > This is a **new library**. `gonew` created only `go.mod`, `LICENSE`, `README.md` and a stub `email.go`.
@@ -23,7 +23,7 @@ The first concrete channel of `webtyp.com/notify`: it sends an `Alert` as an ema
 **row in the application's database** (`notify.Config`), created or changed without a rebuild. It adds no concept of its
 own. Prices and limits for the owner are in `docs/PRICING.md` (already written; do not edit it).
 
-Dependency: `webtyp.com/notify` at `NOTIFY_TAG`. Server-side only: every non-test file carries `//go:build !wasm`.
+Dependency: `webtyp.com/notify` at `v0.1.0`. Server-side only: every non-test file carries `//go:build !wasm`.
 Because this is integration code for an outside service, the standard library's `net/http` and `encoding/json` are
 allowed here (follow how `veltylabs/transbank` does its HTTP calls).
 
@@ -93,7 +93,7 @@ returned channel's `Name()` equals `c.Name`.
 
 ### Stage 1 — the driver (`email.go` replacing the stub, `send.go`)
 
-As specified. `go.mod`: `go 1.26.8`, requires `webtyp.com/notify` at `NOTIFY_TAG`; no local `replace`.
+As specified. `go.mod`: `go 1.26.8`, requires `webtyp.com/notify` at `v0.1.0`; no local `replace`.
 
 ### Stage 2 — tests (`tests/`, external package `email_test`, standard library incl. `net/http/httptest`)
 
