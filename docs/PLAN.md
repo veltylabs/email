@@ -1,8 +1,10 @@
 ---
-PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \"email\")"
+PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \\\"email\\\")"
 TAG: v0.1.0
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 3840922618613193728
 ---
 
 > `webtyp.com/notify` v0.1.0 is published; this plan depends on it.
