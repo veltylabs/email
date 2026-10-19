@@ -1,12 +1,12 @@
 ---
-PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \\\\\\\"email\\\\\\\")"
+PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \\\\\\\\\\\\\\\"email\\\\\\\\\\\\\\\")"
 TAG: v0.1.0
 EXECUTOR: jules
 REVIEWER: none
 STATUS: review
 SESSION: 3840922618613193728
 PR: https://github.com/veltylabs/email/pull/1
-REVIEWED_COMMIT: d295cd36d52bf82ee682f779192768e59f2f33ce
+REVIEWED_COMMIT: 29ecac234461043c61a14b90328192855f104d9f
 ---
 
 > `webtyp.com/notify` v0.1.0 is published; this plan depends on it.
