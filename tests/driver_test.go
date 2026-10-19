@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"webtyp.com/notify"
 	"github.com/veltylabs/email"
+	"webtyp.com/notify"
 )
 
 type fakeResolver map[string]string
@@ -169,5 +169,16 @@ func TestDriver_Register(t *testing.T) {
 
 	if !reg.Has("test_email") {
 		t.Fatal("Channel not found in registry")
+	}
+}
+
+func TestDriver_New_NilResolver(t *testing.T) {
+	d := &email.Driver{}
+	cfg := notify.Config{
+		Settings: []notify.Setting{{Key: email.SettingAccountID, Value: "acc123"}, {Key: email.SettingFrom, Value: "test@example.com"}},
+		Secrets:  []notify.Setting{{Key: email.SecretAPIToken, Value: "the_token"}},
+	}
+	if _, err := d.New(cfg, nil); err == nil {
+		t.Fatal("a nil SecretResolver must be an error, not a panic")
 	}
 }

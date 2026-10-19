@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	wfmt "webtyp.com/fmt"
 	"webtyp.com/notify"
 )
 
@@ -49,23 +50,6 @@ func getSetting(settings []notify.Setting, key string) string {
 	return ""
 }
 
-func contains(s, substr string) bool {
-	for i := 0; i < len(s)-len(substr)+1; i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
-}
-
-func hasPrefix(s, prefix string) bool {
-	return len(s) >= len(prefix) && s[0:len(prefix)] == prefix
-}
-
-func hasSuffix(s, suffix string) bool {
-	return len(s) >= len(suffix) && s[len(s)-len(suffix):] == suffix
-}
-
 func (d *Driver) New(c notify.Config, secrets notify.SecretResolver) (notify.Channel, error) {
 	accountID := getSetting(c.Settings, SettingAccountID)
 	if accountID == "" {
@@ -76,7 +60,7 @@ func (d *Driver) New(c notify.Config, secrets notify.SecretResolver) (notify.Cha
 	if from == "" {
 		return nil, fmt.Errorf("%w: missing %s", notify.ErrConfig, SettingFrom)
 	}
-	if !contains(from, "@") || hasPrefix(from, "@") || hasSuffix(from, "@") || contains(from, " ") {
+	if !wfmt.Contains(from, "@") || wfmt.HasPrefix(from, "@") || wfmt.HasSuffix(from, "@") || wfmt.Contains(from, " ") {
 		return nil, fmt.Errorf("%w: invalid %s", notify.ErrConfig, SettingFrom)
 	}
 
@@ -85,6 +69,9 @@ func (d *Driver) New(c notify.Config, secrets notify.SecretResolver) (notify.Cha
 		return nil, fmt.Errorf("%w: missing secret key %s", notify.ErrConfig, SecretAPIToken)
 	}
 
+	if secrets == nil {
+		return nil, fmt.Errorf("%w: no secret resolver was given", notify.ErrConfig)
+	}
 	token, err := secrets.Secret(tokenName)
 	if err != nil {
 		return nil, fmt.Errorf("%w: cannot resolve secret %s: %v", notify.ErrConfig, SecretAPIToken, err)

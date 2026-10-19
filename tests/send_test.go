@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"webtyp.com/notify"
 	"github.com/veltylabs/email"
+	"webtyp.com/notify"
 )
 
 func TestSend(t *testing.T) {
