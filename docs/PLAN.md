@@ -1,10 +1,12 @@
 ---
-PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \\\"email\\\")"
+PLAN: "feat: email v0.1.0 — the Cloudflare Email Service channel for webtyp/notify (driver kind \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"email\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\")"
 TAG: v0.1.0
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 3840922618613193728
+PR: https://github.com/veltylabs/email/pull/1
+REVIEWED_COMMIT: eb83c96b1ff0bb867db3b0f4e654d8f8bb705f0f
 ---
 
 > `webtyp.com/notify` v0.1.0 is published; this plan depends on it.
@@ -129,3 +131,9 @@ git diff --stat main                                         # only the files of
 | 1 | the driver | `email.go`, `send.go`, `go.mod` |
 | 2 | tests | `tests/driver_test.go`, `tests/send_test.go` |
 | 3 | docs | `README.md`, `docs/ARCHITECTURE.md` |
+
+## Executor notes
+- `webtyp.com/notify` at `v0.1.0` defines `notify.Config.Settings` and `notify.Config.Secrets` as `[]notify.Setting`, not maps. Iterated over these to get values using a helper function.
+- `SecretResolver` interface in `v0.1.0` has a `Secret(name string) (string, error)` method, not `Resolve()`.
+- Implemented `contains`, `hasPrefix`, and `hasSuffix` manually in `email.go` to conform with rule prohibiting `strings` standard package.
+- Used `http.NewRequest` instead of `http.NewRequestWithContext` since `Channel.Send` method in `notify` interface doesn't accept a `context.Context` parameter. Checked timeout in tests using the injected HTTP Client's internal timeout instead of `context.WithDeadline`.
