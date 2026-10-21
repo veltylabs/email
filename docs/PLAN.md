@@ -2,8 +2,10 @@
 PLAN: "feat!: the email driver declares its label and fields (notify.Driver.Label/Fields)"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 16563578987340549225
+PR: https://github.com/veltylabs/email/pull/2
+REVIEWED_COMMIT: 97b874552f687e64f9debc6bdf98703675910be0
 ---
 
 > Read AGENTS.md at the repo root before any change.
