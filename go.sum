@@ -10,3 +10,5 @@ webtyp.com/msgtype v0.1.0 h1:TQszRqVpn3tWMCt68ZGgehISd/SiEFd1JD/DF6cz+eI=
 webtyp.com/msgtype v0.1.0/go.mod h1:TuJTpQvEfe27S/Vy1TRWelCkSCyrOs8b9qJXSDe2HQ4=
 webtyp.com/notify v0.2.2 h1:Lf9QHbdktofH9t5c7NRZBmj2e9l+pAxVQwo5Py+pwpw=
 webtyp.com/notify v0.2.2/go.mod h1:G9t5dBv9FxYxXxb2z5JXWcBx/uDpfomBWXwGElG3/Qo=
+webtyp.com/notify v0.2.3 h1:qTsy65aA3vknU3/u0Jg2urGicJySeNg+RX7wO//fzW4=
+webtyp.com/notify v0.2.3/go.mod h1:ZgydJIEbGC2Bsv7JtTX86ijLCMdC0vphudC0v22TARY=

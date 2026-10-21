@@ -8,6 +8,7 @@ import (
 	"time"
 
 	wfmt "webtyp.com/fmt"
+	"webtyp.com/lang"
 	"webtyp.com/notify"
 )
 
@@ -40,6 +41,17 @@ type Driver struct {
 }
 
 func (d *Driver) Kind() string { return Kind }
+
+func (d *Driver) Label() lang.Text { return "Email" }
+
+func (d *Driver) Fields() []notify.Field {
+	return []notify.Field{
+		{Key: SettingAccountID, Label: "Cloudflare account ID", Help: "Cloudflare dashboard → Account home → Account ID", Required: true},
+		{Key: SettingFrom, Label: "Sender address", Help: "An address on a domain onboarded in Cloudflare Email Sending", Required: true},
+		{Key: SettingFromName, Label: "Sender name"},
+		{Key: SecretAPIToken, Label: "API token secret name", Help: "Name of the secret that holds a Cloudflare API token with Email Sending permission", Secret: true, Required: true},
+	}
+}
 
 func getSetting(settings []notify.Setting, key string) string {
 	for _, s := range settings {

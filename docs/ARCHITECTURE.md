@@ -4,6 +4,17 @@ This driver uses the **Cloudflare Email Service REST API**, instead of SMTP or t
 
 Cloudflare Email Sending is currently in beta.
 
+## Configuration Fields
+
+| Key | Label | Secret | Required |
+|---|---|---|---|
+| `account_id` | Cloudflare account ID | No | Yes |
+| `from` | Sender address | No | Yes |
+| `from_name` | Sender name | No | No |
+| `api_token` | API token secret name | Yes | Yes |
+
+The `endpoint` setting is purposefully not declared as a field because it exists only so tests can point the driver at `httptest`, and a person must never see it.
+
 ## Out of Scope
 
 The following features are not supported in this version:

@@ -1,0 +1,13 @@
+{
+  "languages": ["es"],
+  "keys": {
+    "API token secret name": ["Nombre del secreto del token de API"],
+    "An address on a domain onboarded in Cloudflare Email Sending": ["Una dirección en un dominio incorporado en Cloudflare Email Sending"],
+    "Cloudflare account ID": ["ID de la cuenta de Cloudflare"],
+    "Cloudflare dashboard → Account home → Account ID": ["Panel de Cloudflare → Inicio de cuenta → ID de cuenta"],
+    "Email": ["Correo electrónico"],
+    "Name of the secret that holds a Cloudflare API token with Email Sending permission": ["Nombre del secreto que contiene un token de API de Cloudflare con permiso de Email Sending"],
+    "Sender address": ["Dirección del remitente"],
+    "Sender name": ["Nombre del remitente"]
+  }
+}
