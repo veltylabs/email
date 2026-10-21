@@ -150,8 +150,24 @@ func TestDriver_New(t *testing.T) {
 }
 
 func TestDriver_Register(t *testing.T) {
-	var reg notify.Registry
-	reg.RegisterDriver(&email.Driver{})
+	r := &notify.Registry{}
+	if err := r.RegisterDriver(&email.Driver{}); err != nil {
+		t.Fatalf("F1 failed: RegisterDriver returned err: %v", err)
+	}
+
+	label, fields, ok := r.DriverOf(email.Kind)
+	if !ok {
+		t.Fatalf("F2 failed: DriverOf returned ok=false")
+	}
+	if label != "Email" {
+		t.Errorf("F2 failed: label is %q, want \"Email\"", label)
+	}
+	if len(fields) != 4 {
+		t.Fatalf("F2 failed: expected 4 fields, got %d", len(fields))
+	}
+	if fields[0].Key != email.SettingAccountID || fields[1].Key != email.SettingFrom || fields[2].Key != email.SettingFromName || fields[3].Key != email.SecretAPIToken {
+		t.Errorf("F2 failed: fields order incorrect")
+	}
 
 	config := notify.Config{
 		Name:     "test_email",
@@ -162,13 +178,45 @@ func TestDriver_Register(t *testing.T) {
 	}
 	resolver := fakeResolver{"the_token": "secret"}
 
-	err := reg.Load([]notify.Config{config}, resolver)
+	err := r.Load([]notify.Config{config}, resolver)
 	if err != nil {
 		t.Fatalf("Load failed: %v", err)
 	}
 
-	if !reg.Has("test_email") {
+	if !r.Has("test_email") {
 		t.Fatal("Channel not found in registry")
+	}
+}
+
+func TestDriver_Fields(t *testing.T) {
+	fields := (&email.Driver{}).Fields()
+
+	requiredMap := map[string]bool{}
+	secretMap := map[string]bool{}
+	hasEndpoint := false
+
+	for _, f := range fields {
+		if f.Required {
+			requiredMap[f.Key] = true
+		}
+		if f.Secret {
+			secretMap[f.Key] = true
+		}
+		if f.Key == email.SettingEndpoint {
+			hasEndpoint = true
+		}
+	}
+
+	if !requiredMap[email.SettingAccountID] || !requiredMap[email.SettingFrom] || !requiredMap[email.SecretAPIToken] {
+		t.Errorf("F3 failed: account_id, from, and api_token should be Required")
+	}
+
+	if len(secretMap) != 1 || !secretMap[email.SecretAPIToken] {
+		t.Errorf("F3 failed: api_token should be the only Secret")
+	}
+
+	if hasEndpoint {
+		t.Errorf("F3 failed: field with key endpoint should not exist")
 	}
 }
 

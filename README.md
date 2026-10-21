@@ -5,16 +5,16 @@ The email channel for webtyp/notify. It sends alerts through the Cloudflare Emai
 
 ## Configuration
 
-It is configured through the application's database (`notify.Config`). Settings are:
+It is configured through the application's database (`notify.Config`).
 
-- `account_id` (required): the Cloudflare account id.
-- `from` (required): the sender address, on a domain onboarded in Email Sending.
-- `from_name` (optional): the sender's display name.
-- `endpoint` (optional): base URL of the API. Defaults to the Cloudflare v4 API.
+| Key | Label | Secret | Required |
+|---|---|---|---|
+| `account_id` | Cloudflare account ID | No | Yes |
+| `from` | Sender address | No | Yes |
+| `from_name` | Sender name | No | No |
+| `api_token` | API token secret name | Yes | Yes |
 
-Secrets are referenced by name, not by value:
-
-- `api_token` (required): the name of the secret in the secret store.
+The `endpoint` setting is purposefully not declared as a field because it exists only so tests can point the driver at `httptest`, and a person must never see it.
 
 See [docs/PRICING.md](docs/PRICING.md) for costs.
 
