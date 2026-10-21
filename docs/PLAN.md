@@ -2,6 +2,8 @@
 PLAN: "feat!: the email driver declares its label and fields (notify.Driver.Label/Fields)"
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 16563578987340549225
 ---
 
 > Read AGENTS.md at the repo root before any change.
