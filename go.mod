@@ -12,5 +12,5 @@ require (
 
 require (
 	webtyp.com/events v0.1.0 // indirect
-	webtyp.com/model v0.2.11 // indirect
+	webtyp.com/model v0.2.12 // indirect
 )
