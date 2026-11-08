@@ -6,7 +6,7 @@ require webtyp.com/notify v0.2.3
 
 require (
 	webtyp.com/fmt v1.0.0
-	webtyp.com/lang v0.1.14
+	webtyp.com/lang v0.1.15
 	webtyp.com/msgtype v0.1.0
 )
 
